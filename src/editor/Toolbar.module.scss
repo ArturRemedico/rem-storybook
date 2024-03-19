@@ -1,0 +1,11 @@
+.toolbar {
+    display: flex;
+    column-gap: 10px;
+    width: auto !important;
+    height: 34px !important;
+    background: white;
+
+    &:before {
+        background-color: white;
+    }
+}
