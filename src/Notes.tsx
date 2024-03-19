@@ -54,7 +54,7 @@ const Notes: FC<TNotesProps> = ({ title, placeholder = "" }) => {
             </p>
 
             <RichTextEditor
-                initialValue={startText}
+                initialData={startText}
                 placeholder={placeholder}
                 isCanEdit
                 onSave={saveHandler}

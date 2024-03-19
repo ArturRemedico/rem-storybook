@@ -17,7 +17,7 @@ import { filterEmptyChildren } from "../lib/filterEmptyChildren"
 import { Toolbar } from "./Toolbar/Toolbar"
 
 type TRichTextEditorProps = {
-    initialValue: string
+    initialData: string
     label?: string
     placeholder?: string
     isCanEdit?: boolean
@@ -27,17 +27,19 @@ type TRichTextEditorProps = {
 }
 
 export function RichTextEditor(props: TRichTextEditorProps) {
-    const { placeholder = "Enter some text…", initialValue, isCanEdit = false, onSave } = props
+    const { placeholder = "Enter some text…", initialData, isCanEdit = false, onSave } = props
 
-    const [value, setValue] = useState(() => filterEmptyChildren(deserializeFromHtml(initialValue)))
+    const [value, setValue] = useState(() => filterEmptyChildren(deserializeFromHtml(initialData)))
     const [isEditorFocused, setIsEditorFocused] = useState<boolean>(false)
 
-    const lastSavedValueRef = useRef(initialValue)
+    const lastSavedDataRef = useRef(initialData)
 
     function saveHandler() {
         if (isEditorFocused) {
             const serializedData = serializeToHtml(value)
-            if (lastSavedValueRef.current !== serializedData) {
+
+            console.log(lastSavedDataRef.current === serializedData)
+            if (lastSavedDataRef.current !== serializedData) {
                 onSave(serializedData)
             }
         }
@@ -54,8 +56,8 @@ export function RichTextEditor(props: TRichTextEditorProps) {
     }
 
     useEffect(() => {
-        lastSavedValueRef.current = initialValue
-    }, [initialValue])
+        lastSavedDataRef.current = initialData
+    }, [initialData])
 
     return (
         <ClickAnywhere onClickAway={saveHandler} stopSelector={styles.kitEditorContainer}>

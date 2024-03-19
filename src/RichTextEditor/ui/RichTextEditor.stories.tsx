@@ -1,17 +1,46 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta } from "@storybook/react"
 import { RichTextEditor as Component } from "./RichTextEditor"
 import "../../index.css"
 import { Toaster, toast } from "sonner"
+import { useState } from "react"
 
 const meta = {
     title: "Editor/RichTextEditor",
     component: Component,
     decorators: [
         Story => {
+            const [startText, setStartText] = useState(() => {
+                return localStorage.getItem("slate-html") ?? ""
+            })
+
+            async function saveHandler(v: string) {
+                await new Promise(res => {
+                    setTimeout(() => {
+                        res("")
+                    }, 500)
+                })
+
+                setStartText(v)
+                localStorage.setItem("slate-html", v)
+                toast("Data saved", {
+                    style: {
+                        backgroundColor: "#31D9A4",
+                        color: "#fff",
+                    },
+                })
+            }
+
             return (
                 <div style={{ width: "900px" }}>
                     <Toaster />
-                    <Story />
+                    <Story
+                        args={{
+                            initialData: startText,
+                            onSave: saveHandler,
+                            placeholder: "placeholder",
+                            isCanEdit: true,
+                        }}
+                    />
                 </div>
             )
         },
@@ -19,27 +48,5 @@ const meta = {
 } satisfies Meta<typeof Component>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const RichTextEditor: Story = {
-    args: {
-        initialValue: localStorage.getItem("slate-html") ?? "",
-        placeholder: "placeholder",
-        isCanEdit: true,
-        onSave: async (value: string) => {
-            await new Promise(res => {
-                setTimeout(() => {
-                    res("")
-                }, 500)
-            })
-
-            localStorage.setItem("slate-html", value)
-            toast("Data saved", {
-                style: {
-                    backgroundColor: "#31D9A4",
-                    color: "#fff",
-                },
-            })
-        },
-    },
-}
+export const RichTextEditor = {}
