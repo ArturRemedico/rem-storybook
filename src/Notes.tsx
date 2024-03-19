@@ -1,5 +1,5 @@
 import { FC, CSSProperties } from "react"
-import KitTextEditor from "./KitTextEditor"
+import KitTextEditor from "./TextEditor/KitTextEditor"
 
 type TNotesProps = {
     title: string

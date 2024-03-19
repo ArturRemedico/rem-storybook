@@ -1,10 +1,10 @@
 import React from "react"
 import { useSlate } from "slate-react"
 import { toggleBlock, isBlockActive } from "./util"
-import SmoothSquircle from "../SmoothSquircle"
-import { BulletListIcon, NumberListIcon } from "../Icons"
-import { classNames } from "../class"
 import styles from "./ListToolbar.module.scss"
+import { classNames } from "../../class"
+import { NumberListIcon, BulletListIcon } from "../Icons"
+import SmoothSquircle from "../SmoothSquircle"
 
 export const ListToolbar: React.FC = () => {
     const editor = useSlate()

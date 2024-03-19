@@ -1,9 +1,9 @@
 import React from "react"
 import { useSlate } from "slate-react"
 import { toggleBlock, isBlockActive } from "./util"
-import SmoothSquircle from "../SmoothSquircle"
-import { classNames } from "../class"
 import styles from "./HeadingToolbar.module.scss"
+import { classNames } from "../../class"
+import SmoothSquircle from "../SmoothSquircle"
 
 export const HeadingToolbar: React.FC = () => {
     const editor = useSlate()

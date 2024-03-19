@@ -1,10 +1,10 @@
 import React from "react"
 import { useSlate } from "slate-react"
 import { toggleMark, isMarkActive } from "./util"
-import SmoothSquircle from "../SmoothSquircle"
-import { BoldIcon, ItalicIcon, UnderLineIcon } from "../Icons"
 import styles from "./FormatToolbar.module.scss"
-import { classNames } from "../class"
+import { classNames } from "../../class"
+import { BoldIcon, ItalicIcon, UnderLineIcon } from "../Icons"
+import SmoothSquircle from "../SmoothSquircle"
 
 export const FormatToolbar: React.FC = () => {
     const editor = useSlate()

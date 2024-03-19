@@ -11,17 +11,17 @@ import {
 import { createEditor } from "slate"
 import { Slate, Editable, withReact, ReactEditor } from "slate-react"
 import { withHistory } from "slate-history"
-import { deserializeFromHtml } from "./editor/deserializeFromHtml"
-import { serializeToHtml } from "./editor/serializeToHtml"
-import { Toolbar } from "./editor/Toolbar"
-import { isBlockActive, toggleBlock, toggleMark, withInline } from "./editor/util"
 import isHotkey from "is-hotkey"
 import ClickAnyWhere from "./ClickAnyWhere"
 import SmoothSquircle from "./SmoothSquircle"
-import "./index.css"
+import "../index.css"
 import styles from "./KitTextEditor.module.scss"
-import { classNames } from "./class"
+import { classNames } from "../class"
 import { SendIcon } from "./Icons"
+import { Toolbar } from "./editor/Toolbar"
+import { deserializeFromHtml } from "./editor/deserializeFromHtml"
+import { serializeToHtml } from "./editor/serializeToHtml"
+import { withInline, toggleMark, isBlockActive, toggleBlock } from "./editor/util"
 
 type Props = {
     startText: string

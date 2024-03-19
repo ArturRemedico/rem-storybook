@@ -1,10 +1,10 @@
 import { FC } from "react"
 import { toggleBlock, isBlockActive } from "./util"
 import { useSlate } from "slate-react"
-import SmoothSquircle from "../SmoothSquircle"
-import { CenterIcon, JustifyIcon, RightIcon } from "../Icons"
 import styles from "./AlignToolbar.module.scss"
-import { classNames } from "../class"
+import { classNames } from "../../class"
+import { CenterIcon, RightIcon, JustifyIcon } from "../Icons"
+import SmoothSquircle from "../SmoothSquircle"
 
 export const AlignToolbar: FC = () => {
     const editor = useSlate()
