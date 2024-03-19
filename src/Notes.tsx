@@ -1,5 +1,6 @@
-import { FC, CSSProperties } from "react"
+import { FC } from "react"
 import { RichTextEditor } from "./RichTextEditor"
+import { toast } from "sonner"
 
 type TNotesProps = {
     title: string
@@ -9,17 +10,9 @@ type TNotesProps = {
     startText: string
     status: string
     emplId: string
-    inpWrapSubStyle?: CSSProperties
-    wrapSubStyle?: CSSProperties
 }
 
-const Notes: FC<TNotesProps> = ({
-    title,
-    placeholder = "",
-    startText,
-    inpWrapSubStyle,
-    wrapSubStyle,
-}) => {
+const Notes: FC<TNotesProps> = ({ title, placeholder = "", startText }) => {
     return (
         <div
             style={{
@@ -40,11 +33,17 @@ const Notes: FC<TNotesProps> = ({
             </p>
 
             <RichTextEditor
-                startText={startText}
+                initialValue={startText}
                 placeholder={placeholder}
-                inpWrapSubStyle={inpWrapSubStyle}
-                wrapSubStyle={wrapSubStyle}
                 isCanEdit
+                onSave={() =>
+                    toast("Data saved", {
+                        style: {
+                            backgroundColor: "#31D9A4",
+                            color: "#fff",
+                        },
+                    })
+                }
             />
         </div>
     )

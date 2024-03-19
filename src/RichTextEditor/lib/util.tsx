@@ -1,10 +1,9 @@
 /* eslint-disable */
 import { Editor, Element as SlateElement, Transforms } from "slate"
+import { LIST_TYPES, TEXT_ALIGN_TYPES } from "../const/const"
+import { ReactEditor } from "slate-react"
 
-const LIST_TYPES = ["numbered-list", "bulleted-list"]
-const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"]
-
-export const toggleBlock = (editor: any, format: any) => {
+export const toggleBlock = (editor: ReactEditor, format: any) => {
     const isActive = isBlockActive(
         editor,
         format,
@@ -40,7 +39,7 @@ export const toggleBlock = (editor: any, format: any) => {
     }
 }
 
-export const toggleMark = (editor: any, format: any) => {
+export const toggleMark = (editor: ReactEditor, format: any) => {
     const isActive = isMarkActive(editor, format)
 
     if (isActive) {
@@ -50,7 +49,7 @@ export const toggleMark = (editor: any, format: any) => {
     }
 }
 
-export const withInline = (editor: any) => {
+export const withInline = (editor: ReactEditor) => {
     const { isVoid } = editor
 
     editor.isInline = (element: any) => {
@@ -60,7 +59,7 @@ export const withInline = (editor: any) => {
     return editor
 }
 
-export const isBlockActive = (editor: any, format: any, blockType = "type") => {
+export const isBlockActive = (editor: ReactEditor, format: any, blockType = "type") => {
     const { selection } = editor
     if (!selection) return false
 
@@ -77,7 +76,7 @@ export const isBlockActive = (editor: any, format: any, blockType = "type") => {
     return !!match
 }
 
-export const isMarkActive = (editor: any, format: any) => {
+export const isMarkActive = (editor: ReactEditor, format: any) => {
     const marks = Editor.marks(editor)
     return marks ? (marks as any)[format] === true : false
 }

@@ -1,9 +1,9 @@
 import React from "react"
 import { useSlate } from "slate-react"
-import { toggleBlock, isBlockActive } from "./util"
+import { toggleBlock, isBlockActive } from "../../lib/util"
 import styles from "./ListToolbar.module.scss"
-import { NumberListIcon, BulletListIcon } from "../const/Icons"
-import { SmoothSquircle } from "../../_internal/SmoothSquircle"
+import { NumberListIcon, BulletListIcon } from "../../const/Icons"
+import { SmoothSquircle } from "../../../_internal/SmoothSquircle"
 import { clsx } from "clsx"
 
 export const ListToolbar: React.FC = () => {

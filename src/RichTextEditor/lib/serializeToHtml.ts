@@ -87,14 +87,6 @@ const serialize = (node: TNodeWithAttributes): string => {
             return `<h1 ${textAlign}>${children}</h1>`
         case "h2":
             return `<h2 ${textAlign}>${children}</h2>`
-        // case "heading3":
-        //     return `<h3 ${textAlign}>${children}</h3>`
-        // case "heading4":
-        //     return `<h4 ${textAlign}>${children}</h4>`
-        // case "heading5":
-        //     return `<h5 ${textAlign}>${children}</h5>`
-        // case "heading6":
-        //     return `<h6 ${textAlign}>${children}</h6>`
         case "list-item":
             return `<li ${textAlign}>${children}</li>`
         case "numbered-list":

@@ -1,9 +1,9 @@
 import { FC } from "react"
-import { toggleBlock, isBlockActive } from "./util"
+import { toggleBlock, isBlockActive } from "../../lib/util"
 import { useSlate } from "slate-react"
 import styles from "./AlignToolbar.module.scss"
-import { CenterIcon, RightIcon, JustifyIcon } from "../const/Icons"
-import { SmoothSquircle } from "../../_internal/SmoothSquircle"
+import { CenterIcon, RightIcon, JustifyIcon } from "../../const/Icons"
+import { SmoothSquircle } from "../../../_internal/SmoothSquircle"
 import { clsx } from "clsx"
 
 export const AlignToolbar: FC = () => {
