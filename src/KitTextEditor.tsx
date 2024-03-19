@@ -1,5 +1,13 @@
 /* eslint-disable */
-import { useState, useCallback, useMemo, KeyboardEvent, HTMLAttributes, FC } from "react"
+import {
+    useState,
+    useCallback,
+    useMemo,
+    KeyboardEvent,
+    HTMLAttributes,
+    FC,
+    CSSProperties,
+} from "react"
 import { createEditor } from "slate"
 import { Slate, Editable, withReact, ReactEditor } from "slate-react"
 import { withHistory } from "slate-history"
@@ -23,14 +31,11 @@ type Props = {
     wrapperProps?: HTMLAttributes<HTMLDivElement>
     placeholder?: string
     isEdit?: boolean
-    inpSubStyle?: any
-    inpWrapSubStyle?: any
-    wrapSubStyle?: any
+    inpSubStyle?: CSSProperties
+    inpWrapSubStyle?: CSSProperties
+    wrapSubStyle?: CSSProperties
     bg?: string
     borderColor?: string
-    withVariables?: boolean
-    hideVariablesToolbar?: boolean
-    focusEveryTime?: boolean
 }
 
 type THotkeys = {

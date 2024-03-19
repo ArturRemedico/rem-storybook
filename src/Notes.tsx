@@ -45,10 +45,8 @@ const Notes: FC<TNotesProps> = ({
                 startText={startText}
                 placeholder={placeholder}
                 fieldId={fieldId}
-                hideVariablesToolbar={true}
                 inpWrapSubStyle={inpWrapSubStyle}
                 wrapSubStyle={wrapSubStyle}
-                withVariables={true}
                 isEdit
             />
         </div>
