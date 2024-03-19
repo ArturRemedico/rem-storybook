@@ -9,7 +9,7 @@ const meta = {
     decorators: [
         Story => {
             return (
-                <div>
+                <div style={{ width: "900px" }}>
                     <Toaster />
                     <Story />
                 </div>
