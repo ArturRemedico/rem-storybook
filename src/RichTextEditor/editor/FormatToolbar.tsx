@@ -2,9 +2,9 @@ import React from "react"
 import { useSlate } from "slate-react"
 import { toggleMark, isMarkActive } from "./util"
 import styles from "./FormatToolbar.module.scss"
-import { classNames } from "../../class"
-import { BoldIcon, ItalicIcon, UnderLineIcon } from "../Icons"
-import SmoothSquircle from "../SmoothSquircle"
+import { BoldIcon, ItalicIcon, UnderLineIcon } from "../const/Icons"
+import { SmoothSquircle } from "../../_internal/SmoothSquircle"
+import { clsx } from "clsx"
 
 export const FormatToolbar: React.FC = () => {
     const editor = useSlate()
@@ -15,7 +15,7 @@ export const FormatToolbar: React.FC = () => {
                 onClick={() => {
                     toggleMark(editor, "bold")
                 }}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isMarkActive(editor, "bold"),
                 })}
                 cornerRadius={8}
@@ -29,7 +29,7 @@ export const FormatToolbar: React.FC = () => {
                 onClick={() => {
                     toggleMark(editor, "italic")
                 }}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isMarkActive(editor, "italic"),
                 })}
                 cornerRadius={8}
@@ -43,7 +43,7 @@ export const FormatToolbar: React.FC = () => {
                 onClick={() => {
                     toggleMark(editor, "underline")
                 }}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isMarkActive(editor, "underline"),
                 })}
                 cornerRadius={8}

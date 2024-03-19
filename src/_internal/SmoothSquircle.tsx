@@ -13,7 +13,7 @@ type TSmoothSquircleProps = {
     onClick?: () => void
 }
 
-const SmoothSquircle: React.FC<PropsWithChildren<TSmoothSquircleProps>> = ({
+export const SmoothSquircle: React.FC<PropsWithChildren<TSmoothSquircleProps>> = ({
     className,
     backgroundColor = "white",
     borderColor = "#ECECEC",
@@ -60,5 +60,3 @@ const SmoothSquircle: React.FC<PropsWithChildren<TSmoothSquircleProps>> = ({
         </div>
     )
 }
-
-export default SmoothSquircle

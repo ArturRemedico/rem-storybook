@@ -2,9 +2,9 @@ import { FC } from "react"
 import { toggleBlock, isBlockActive } from "./util"
 import { useSlate } from "slate-react"
 import styles from "./AlignToolbar.module.scss"
-import { classNames } from "../../class"
-import { CenterIcon, RightIcon, JustifyIcon } from "../Icons"
-import SmoothSquircle from "../SmoothSquircle"
+import { CenterIcon, RightIcon, JustifyIcon } from "../const/Icons"
+import { SmoothSquircle } from "../../_internal/SmoothSquircle"
+import { clsx } from "clsx"
 
 export const AlignToolbar: FC = () => {
     const editor = useSlate()
@@ -13,7 +13,7 @@ export const AlignToolbar: FC = () => {
         <div className={styles.alignToolbar}>
             <SmoothSquircle
                 onClick={() => toggleBlock(editor, "center")}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "center", "align"),
                 })}
                 cornerRadius={8}
@@ -25,7 +25,7 @@ export const AlignToolbar: FC = () => {
 
             <SmoothSquircle
                 onClick={() => toggleBlock(editor, "right")}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "right", "align"),
                 })}
                 cornerRadius={8}
@@ -37,7 +37,7 @@ export const AlignToolbar: FC = () => {
 
             <SmoothSquircle
                 onClick={() => toggleBlock(editor, "justify")}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "justify", "align"),
                 })}
                 cornerRadius={8}

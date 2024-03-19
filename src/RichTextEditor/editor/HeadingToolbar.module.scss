@@ -1,4 +1,4 @@
-.formatToolbar {
+.headingToolbar {
     display: flex;
     align-items: center;
 
@@ -11,13 +11,17 @@
         height: 30px !important;
         cursor: pointer;
         background-color: transparent;
-        transition: all 0.2s ease;
+        color: #000;
 
         &:hover::before {
             background-color: #f5f5f5 !important;
+            padding: 0 30px !important;
         }
 
         &.toolActive {
+            color: #fff;
+            background-color: #000;
+
             &::before {
                 background-color: #000 !important;
             }

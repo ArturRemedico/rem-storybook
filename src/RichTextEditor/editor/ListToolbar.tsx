@@ -2,9 +2,9 @@ import React from "react"
 import { useSlate } from "slate-react"
 import { toggleBlock, isBlockActive } from "./util"
 import styles from "./ListToolbar.module.scss"
-import { classNames } from "../../class"
-import { NumberListIcon, BulletListIcon } from "../Icons"
-import SmoothSquircle from "../SmoothSquircle"
+import { NumberListIcon, BulletListIcon } from "../const/Icons"
+import { SmoothSquircle } from "../../_internal/SmoothSquircle"
+import { clsx } from "clsx"
 
 export const ListToolbar: React.FC = () => {
     const editor = useSlate()
@@ -13,7 +13,7 @@ export const ListToolbar: React.FC = () => {
         <div className={styles.listToolbar}>
             <SmoothSquircle
                 onClick={() => toggleBlock(editor, "numbered-list")}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "numbered-list"),
                 })}
                 cornerRadius={8}
@@ -25,7 +25,7 @@ export const ListToolbar: React.FC = () => {
 
             <SmoothSquircle
                 onClick={() => toggleBlock(editor, "bulleted-list")}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "bulleted-list"),
                 })}
                 cornerRadius={8}

@@ -1,9 +1,8 @@
 import { FC, CSSProperties } from "react"
-import KitTextEditor from "./TextEditor/KitTextEditor"
+import { RichTextEditor } from "./RichTextEditor"
 
 type TNotesProps = {
     title: string
-    fieldId?: string
     placeholder?: string
     name: string
     appId: string
@@ -18,7 +17,6 @@ const Notes: FC<TNotesProps> = ({
     title,
     placeholder = "",
     startText,
-    fieldId,
     inpWrapSubStyle,
     wrapSubStyle,
 }) => {
@@ -41,13 +39,12 @@ const Notes: FC<TNotesProps> = ({
                 {title}
             </p>
 
-            <KitTextEditor
+            <RichTextEditor
                 startText={startText}
                 placeholder={placeholder}
-                fieldId={fieldId}
                 inpWrapSubStyle={inpWrapSubStyle}
                 wrapSubStyle={wrapSubStyle}
-                isEdit
+                isCanEdit
             />
         </div>
     )

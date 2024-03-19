@@ -2,8 +2,8 @@ import React from "react"
 import { useSlate } from "slate-react"
 import { toggleBlock, isBlockActive } from "./util"
 import styles from "./HeadingToolbar.module.scss"
-import { classNames } from "../../class"
-import SmoothSquircle from "../SmoothSquircle"
+import { clsx } from "clsx"
+import { SmoothSquircle } from "../../_internal/SmoothSquircle"
 
 export const HeadingToolbar: React.FC = () => {
     const editor = useSlate()
@@ -14,7 +14,7 @@ export const HeadingToolbar: React.FC = () => {
                 onClick={() => {
                     toggleBlock(editor, "h1")
                 }}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "h1"),
                 })}
                 cornerRadius={8}
@@ -28,7 +28,7 @@ export const HeadingToolbar: React.FC = () => {
                 onClick={() => {
                     toggleBlock(editor, "h2")
                 }}
-                className={classNames(styles.tool, {
+                className={clsx(styles.tool, {
                     [styles.toolActive]: isBlockActive(editor, "h2"),
                 })}
                 cornerRadius={8}
