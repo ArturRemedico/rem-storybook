@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { RichTextEditor as Component } from "./RichTextEditor"
-import "../index.css"
+import "../../index.css"
 import { Toaster, toast } from "sonner"
 
 const meta = {
     title: "Editor/RichTextEditor",
     component: Component,
     decorators: [
-        Story => (
-            <div>
-                <Toaster />
-                <Story />
-            </div>
-        ),
+        Story => {
+            return (
+                <div>
+                    <Toaster />
+                    <Story />
+                </div>
+            )
+        },
     ],
 } satisfies Meta<typeof Component>
 
@@ -21,17 +23,23 @@ type Story = StoryObj<typeof meta>
 
 export const RichTextEditor: Story = {
     args: {
-        initialValue: "<p></p>",
+        initialValue: localStorage.getItem("slate-html") ?? "",
         placeholder: "placeholder",
-        label: "Notes",
-        inpWrapSubStyle: { padding: "6px 11px", minHeight: "100px" },
         isCanEdit: true,
-        onSave: () =>
+        onSave: async (value: string) => {
+            await new Promise(res => {
+                setTimeout(() => {
+                    res("")
+                }, 500)
+            })
+
+            localStorage.setItem("slate-html", value)
             toast("Data saved", {
                 style: {
                     backgroundColor: "#31D9A4",
                     color: "#fff",
                 },
-            }),
+            })
+        },
     },
 }

@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { RichTextEditor } from "./RichTextEditor"
 import { toast } from "sonner"
 
@@ -12,7 +12,28 @@ type TNotesProps = {
     emplId: string
 }
 
-const Notes: FC<TNotesProps> = ({ title, placeholder = "", startText }) => {
+const Notes: FC<TNotesProps> = ({ title, placeholder = "" }) => {
+    const [startText, setStartText] = useState(() => {
+        return localStorage.getItem("slate-html") ?? ""
+    })
+
+    async function saveHandler(v: string) {
+        await new Promise(res => {
+            setTimeout(() => {
+                res("")
+            }, 500)
+        })
+
+        setStartText(v)
+        localStorage.setItem("slate-html", v)
+        toast("Data saved", {
+            style: {
+                backgroundColor: "#31D9A4",
+                color: "#fff",
+            },
+        })
+    }
+
     return (
         <div
             style={{
@@ -36,14 +57,7 @@ const Notes: FC<TNotesProps> = ({ title, placeholder = "", startText }) => {
                 initialValue={startText}
                 placeholder={placeholder}
                 isCanEdit
-                onSave={() =>
-                    toast("Data saved", {
-                        style: {
-                            backgroundColor: "#31D9A4",
-                            color: "#fff",
-                        },
-                    })
-                }
+                onSave={saveHandler}
             />
         </div>
     )

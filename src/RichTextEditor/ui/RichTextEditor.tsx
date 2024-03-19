@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Descendant } from "slate"
 import { Slate, Editable, ReactEditor } from "slate-react"
 import styles from "./RichTextEditor.module.scss"
@@ -14,7 +14,6 @@ import { Leaf } from "./RenderElements/Leaf"
 import { editor } from "../model/editor"
 import { keyDownHandler } from "../lib/keyDownHandler"
 import { filterEmptyChildren } from "../lib/filterEmptyChildren"
-import { getIsEditorEmpty } from "../lib/getIsEmpty"
 import { Toolbar } from "./Toolbar/Toolbar"
 
 type TRichTextEditorProps = {
@@ -23,45 +22,48 @@ type TRichTextEditorProps = {
     placeholder?: string
     isCanEdit?: boolean
     bg?: string
-    onSave: () => void
+    onSave: (value: string) => Promise<void>
     borderColor?: string
 }
 
 export function RichTextEditor(props: TRichTextEditorProps) {
     const { placeholder = "Enter some text…", initialValue, isCanEdit = false, onSave } = props
 
-    const [value, setValue] = useState(initialValue)
-    const [editorFocus, setEditorFocus] = useState<boolean>(false)
+    const [value, setValue] = useState(() => filterEmptyChildren(deserializeFromHtml(initialValue)))
+    const [isEditorFocused, setIsEditorFocused] = useState<boolean>(false)
 
-    const isEmpty = getIsEditorEmpty(value)
+    const lastSavedValueRef = useRef(initialValue)
 
     function saveHandler() {
-        if (!isEmpty && editorFocus) {
-            onSave()
+        if (isEditorFocused) {
+            const serializedData = serializeToHtml(value)
+            if (lastSavedValueRef.current !== serializedData) {
+                onSave(serializedData)
+            }
         }
-        setEditorFocus(false)
+        setIsEditorFocused(false)
     }
 
     function changeHandler(value: Descendant[]) {
         ReactEditor.focus(editor)
-        setEditorFocus(true)
+        setIsEditorFocused(true)
         const isAstChange = editor.operations.some((op: any) => op.type !== "set_selection")
         if (isAstChange) {
-            setValue(serializeToHtml(value))
+            setValue(value)
         }
     }
+
+    useEffect(() => {
+        lastSavedValueRef.current = initialValue
+    }, [initialValue])
 
     return (
         <ClickAnywhere onClickAway={saveHandler} stopSelector={styles.kitEditorContainer}>
             <div className={styles.kitEditorContainer}>
                 <div className={styles.textareaContainer}>
-                    <SmoothSquircleWrapper isCanEdit={isCanEdit} editorFocus={editorFocus}>
+                    <SmoothSquircleWrapper isCanEdit={isCanEdit} editorFocus={isEditorFocused}>
                         <div className={styles.textarea}>
-                            <Slate
-                                editor={editor}
-                                value={filterEmptyChildren(deserializeFromHtml(value))}
-                                onChange={changeHandler}
-                            >
+                            <Slate editor={editor} value={value} onChange={changeHandler}>
                                 <div className={styles.editorContainer}>
                                     <Editable
                                         renderElement={Element}
@@ -69,24 +71,19 @@ export function RichTextEditor(props: TRichTextEditorProps) {
                                         placeholder={placeholder}
                                         className={styles.editor}
                                         onFocus={() => {
-                                            setEditorFocus(true)
+                                            setIsEditorFocused(true)
                                         }}
                                         onKeyDown={keyDownHandler}
                                     />
                                 </div>
                                 <div
                                     className={clsx(styles.toolbarContainer, {
-                                        [styles.isActive]: isCanEdit && editorFocus,
+                                        [styles.isActive]: isCanEdit && isEditorFocused,
                                     })}
                                 >
                                     <Toolbar />
 
-                                    <div
-                                        onClick={saveHandler}
-                                        className={clsx(styles.sendButton, {
-                                            [styles.sendButtonDisabled]: isEmpty,
-                                        })}
-                                    >
+                                    <div onClick={saveHandler} className={styles.sendButton}>
                                         <SendIcon />
                                     </div>
                                 </div>
