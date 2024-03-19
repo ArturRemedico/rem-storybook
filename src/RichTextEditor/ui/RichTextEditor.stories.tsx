@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react"
 import { RichTextEditor as Component } from "./RichTextEditor"
 import "../../index.css"
 import { Toaster, toast } from "sonner"
@@ -48,5 +48,6 @@ const meta = {
 } satisfies Meta<typeof Component>
 
 export default meta
+type Story = StoryObj<typeof Component>
 
-export const RichTextEditor = {}
+export const RichTextEditor: Story = {}
