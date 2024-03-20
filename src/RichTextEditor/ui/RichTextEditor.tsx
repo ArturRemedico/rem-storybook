@@ -38,7 +38,6 @@ export function RichTextEditor(props: TRichTextEditorProps) {
         if (isEditorFocused) {
             const serializedData = serializeToHtml(value)
 
-            console.log(lastSavedDataRef.current === serializedData)
             if (lastSavedDataRef.current !== serializedData) {
                 onSave(serializedData)
             }
@@ -64,7 +63,11 @@ export function RichTextEditor(props: TRichTextEditorProps) {
             <div className={styles.kitEditorContainer}>
                 <div className={styles.textareaContainer}>
                     <SmoothSquircleWrapper isCanEdit={isCanEdit} editorFocus={isEditorFocused}>
-                        <div className={styles.textarea}>
+                        <div
+                            className={clsx(styles.textarea, {
+                                [styles.isActive]: isCanEdit && isEditorFocused,
+                            })}
+                        >
                             <Slate editor={editor} value={value} onChange={changeHandler}>
                                 <div className={styles.editorContainer}>
                                     <Editable

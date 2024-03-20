@@ -10,7 +10,7 @@ const meta = {
     decorators: [
         Story => {
             const [startText, setStartText] = useState(() => {
-                return localStorage.getItem("slate-html") ?? ""
+                return localStorage.getItem("slate-html") ?? "<p ></p>"
             })
 
             async function saveHandler(v: string) {
